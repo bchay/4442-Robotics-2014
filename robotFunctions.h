@@ -89,6 +89,7 @@ void moveScissorLiftPos(int startHeight, int endHeight) {
 	nMotorEncoder[scissorFront] = 0;
 	if(startHeight == 0 && endHeight == 30)	nMotorEncoderTarget[scissorFront] = 1500;
 	else if (startHeight == 0 && endHeight == 60) nMotorEncoderTarget[scissorFront] = 3000;
+	else if (startHeight == 0 && endHeight == 60) nMotorEncoderTarget[scissorFront] = 0; //CHANGE
 	motor[scissorFront] = 70;
 	while(nMotorRunState[scissorFront] != runStateIdle) {}
 	motor[scissorFront] = 0;
@@ -104,6 +105,10 @@ void dropBallInGoal() {
 	servo[ballContainer] = 20; //Horizontal
 	wait1Msec(1000); //Wait for balls to drop
 	servo[ballContainer] = 220; //Upright
+}
+
+void dropInCenter() {
+		servo[center] = 20;
 }
 
 #endif
