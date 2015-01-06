@@ -22,8 +22,10 @@
 
 
 void initializeRobot() {
-	servo[ballContainer] = 240;
-	servo[grabberRight] = 160;
+	servo[ballContainer] = 100;
+	servo[grabberRight] = 180;
+	servo[grabberLeft] = 0;
+	servo[grabberSide] = 160;
   return;
 }
 
@@ -41,8 +43,13 @@ task main() {
 		motor[ballRamp] = 0;
 		if(joystick.joy1_TopHat == 6) servo[ballContainer] = 55;
 		if(joystick.joy1_TopHat == 2) servo[ballContainer] = 240;
+
 		if(joy2Btn(4) == 1) servo[grabberRight] = 180; //Up
-		if (joy2Btn(2) == 1) servo[grabberRight] = 0; //Down
+		if(joy2Btn(2) == 1) servo[grabberRight] = 0; //Down
+		if(joy2Btn(1) == 1) servo[grabberLeft] = 180; //Right
+		if(joy2Btn(3) == 1) servo[grabberLeft] = 0; //left
+		if(joy1Btn(4) == 1) servo[grabberSide] = 190; //up
+		if(joy1Btn(2) == 1) servo[grabberSide] = 0; //down
 		if(joystick.joy1_y1 > 30) motor[scissorFront] = 80; //> 10
 		if(joystick.joy1_y1 < -30) motor[scissorFront] =  -80; //> 10
 		if(joystick.joy1_y2 > 10) motor[ballRamp] = 75;

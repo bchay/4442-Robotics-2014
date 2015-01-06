@@ -11,7 +11,7 @@
 #pragma config(Motor,  mtr_S1_C4_2,     ballRamp,      tmotorTetrix, openLoop)
 #pragma config(Servo,  srvo_S1_C3_1,    ballContainer,        tServoStandard)
 #pragma config(Servo,  srvo_S1_C3_2,    grabberRight,         tServoStandard)
-#pragma config(Servo,  srvo_S1_C3_3,    grabberLeft,        tServoStandard)
+#pragma config(Servo,  srvo_S1_C3_3,    grabberLeft,          tServoStandard)
 #pragma config(Servo,  srvo_S1_C3_4,    grabberSide,          tServoStandard)
 #pragma config(Servo,  srvo_S1_C3_5,    servo5,               tServoNone)
 #pragma config(Servo,  srvo_S1_C3_6,    servo6,               tServoNone)
@@ -22,7 +22,9 @@
 
 void initializeRobot() {
 	servo[ballContainer] = 220;
-	servo[grabberRight] = 180;
+	servo[grabberRight] = 160;
+	servo[grabberLeft] = 160;
+	servo[grabberSide] = 160;
 	return;
 }
 

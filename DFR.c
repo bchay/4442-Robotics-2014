@@ -22,7 +22,9 @@
 
 void initializeRobot() {
 	servo[ballContainer] = 220;
-	servo[grabberRight] = 180;
+	servo[grabberRight] = 160;
+	servo[grabberLeft] = 160;
+	servo[grabberSide] = 160;
 	return;
 }
 

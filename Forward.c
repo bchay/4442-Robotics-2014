@@ -21,8 +21,10 @@
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
 void initializeRobot() {
-	servo[ballContainer] = 240;
-	servo[grabberFront] = 180;
+	servo[ballContainer] = 220;
+	servo[grabberRight] = 160;
+	servo[grabberLeft] = 160;
+	servo[grabberSide] = 160;
 	return;
 }
 
