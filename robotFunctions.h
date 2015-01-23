@@ -1,7 +1,10 @@
 #ifndef robotFunctions_h
 #define robotFunctions_h
 
+int rightServoPos;
+int leftServoPos;
 void move(float distance, int power) { //distance in inches
+	if(power > 0 && (rightServoPos != 0 || leftServoPos != 0)) return;
 	motor[leftFront] = 0;
 	motor[leftBack] = 0;
 	motor[rightFront] = 0;
@@ -26,6 +29,7 @@ void move(float distance, int power) { //distance in inches
 	motor[leftBack] = 0;
 	motor[rightFront] = 0;
 	motor[rightBack] = 0;
+	wait1Msec(200);
 }
 
 void turn(float degree, int power, bool leftDir) {
@@ -33,7 +37,7 @@ void turn(float degree, int power, bool leftDir) {
 	nMotorEncoder[rightFront] = 0;
 	nMotorEncoder[rightBack] = 0;
 	nMotorEncoder[leftBack] = 0;
-	float stopTurn = degree / .045;
+	float stopTurn = degree / .04305555555;
 	if(leftDir) {
 		nMotorEncoderTarget[rightFront] = stopTurn * -1;
 		nMotorEncoderTarget[rightBack] = stopTurn * -1;
@@ -59,22 +63,27 @@ void turn(float degree, int power, bool leftDir) {
 		motor[leftBack] = 0;
 		motor[rightFront] = 0;
 		motor[rightBack] = 0;
+		wait1Msec(200);
 }
 
 void grabRollingGoalRight() {
-	servo[grabberRight] = 20;
+	servo[grabberRight] = 100;
+	rightServoPos = 1;
 }
 
 void releaseRollingGoalRight() {
-	servo[grabberRight] = 180;
+	servo[grabberRight] = 210;
+	rightServoPos = 0;
 }
 
 void grabRollingGoalLeft() {
-	servo[grabberLeft] = 20;
+	servo[grabberLeft] = 200;
+	leftServoPos = 1;
 }
 
 void releaseRollingGoalLeft() {
-	servo[grabberLeft] = 180;
+	servo[grabberLeft] = 30;
+	leftServoPos = 0;
 }
 
 void grabRollingGoalSide() {
@@ -85,30 +94,8 @@ void releaseRollingGoalSide() {
 	servo[grabberSide] = 180;
 }
 
-void moveScissorLiftPos(int startHeight, int endHeight) {
-	nMotorEncoder[scissorFront] = 0;
-	if(startHeight == 0 && endHeight == 30)	nMotorEncoderTarget[scissorFront] = 1500;
-	else if (startHeight == 0 && endHeight == 60) nMotorEncoderTarget[scissorFront] = 3000;
-	else if (startHeight == 0 && endHeight == 60) nMotorEncoderTarget[scissorFront] = 0; //CHANGE
-	motor[scissorFront] = 70;
-	while(nMotorRunState[scissorFront] != runStateIdle) {}
-	motor[scissorFront] = 0;
-}
-
-void moveScissorLift(bool directionUp) {
-	int dir = 1;
-	if(directionUp) dir = -1;
-	motor[scissorFront] = 75 * dir;
-}
-
-void dropBallInGoal() {
-	servo[ballContainer] = 20; //Horizontal
-	wait1Msec(1000); //Wait for balls to drop
-	servo[ballContainer] = 220; //Upright
-}
-
-void dropInCenter() {
-		servo[center] = 20;
+void dropInSmall() {
+		servo[center] = 40;
 }
 
 #endif

@@ -1,5 +1,6 @@
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTServo,  HTMotor)
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
+#pragma config(Sensor, S2,     touch,          sensorTouch)
 #pragma config(Motor,  motorA,           ,             tmotorNXT, openLoop)
 #pragma config(Motor,  motorB,           ,             tmotorNXT, openLoop)
 #pragma config(Motor,  motorC,           ,             tmotorNXT, openLoop)
@@ -21,16 +22,11 @@
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
 void initializeRobot() {
-	servo[ballContainer] = 220;
-	servo[grabberRight] = 160;
-	servo[grabberLeft] = 160;
-	servo[grabberSide] = 160;
-	servo[center] = 0;
+	servo[grabberRight] = 210;
 	return;
 }
 
 task main() {
 	initializeRobot();
 	waitForStart();
-	//dropInCenter();
 }

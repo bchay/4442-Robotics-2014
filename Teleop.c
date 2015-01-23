@@ -1,5 +1,5 @@
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTServo,  HTMotor)
-#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
+#pragma config(Sensor, S2,     touch,          sensorTouch)
 #pragma config(Motor,  motorA,           ,             tmotorNXT, openLoop)
 #pragma config(Motor,  motorB,           ,             tmotorNXT, openLoop)
 #pragma config(Motor,  motorC,           ,             tmotorNXT, openLoop)
@@ -22,11 +22,14 @@
 
 
 void initializeRobot() {
-	servo[ballContainer] = 100;
-	servo[grabberRight] = 180;
-	servo[grabberLeft] = 0;
+	servo[ballContainer] = 170;
+	servo[grabberRight] = 20; //Hook near NXTS
+	rightServoPos = 0; //up
+	servo[grabberLeft] = 30;
+	leftServoPos = 0; //up
 	servo[grabberSide] = 160;
-  return;
+	servo[center] = 255;
+	return;
 }
 
 task main() {
@@ -41,23 +44,37 @@ task main() {
 		motor[rightFront] = 0;
 		motor[scissorFront] = 0;
 		motor[ballRamp] = 0;
-		if(joystick.joy1_TopHat == 6) servo[ballContainer] = 55;
-		if(joystick.joy1_TopHat == 2) servo[ballContainer] = 240;
+		if(joystick.joy1_TopHat == 6) servo[ballContainer] += 10;
+		if(joystick.joy1_TopHat == 2) servo[ballContainer] -= 10;
+		if(joystick.joy2_TopHat == 0) servo[grabberSide] = 160;
+		if(joystick.joy2_TopHat == 4) servo[grabberSide] = 0;
 
-		if(joy2Btn(4) == 1) servo[grabberRight] = 180; //Up
-		if(joy2Btn(2) == 1) servo[grabberRight] = 0; //Down
-		if(joy2Btn(1) == 1) servo[grabberLeft] = 180; //Right
-		if(joy2Btn(3) == 1) servo[grabberLeft] = 0; //left
-		if(joy1Btn(4) == 1) servo[grabberSide] = 190; //up
-		if(joy1Btn(2) == 1) servo[grabberSide] = 0; //down
-		if(joy1Btn(1) == 1) servo[center] = 0; //CHANGE
-		if(joystick.joy1_y1 > 30) motor[scissorFront] = 80; //> 10
-		if(joystick.joy1_y1 < -30) motor[scissorFront] =  -80; //> 10
+		if(joy2Btn(4) == 1) {
+				servo[grabberRight] = 20; //Up
+				rightServoPos = 0;
+		}
+		if(joy2Btn(2) == 1) {
+				servo[grabberRight] = 210; //Down
+				rightServoPos = 1;
+	}
+		if(joy2Btn(1) == 1) {
+				servo[grabberLeft] = 30; //Right
+				leftServoPos = 0;
+		}
+
+		if(joy2Btn(3) == 1) {
+				servo[grabberLeft] = 200; //left
+				leftServoPos = 1;
+		}
+		if(joy1Btn(1) == 1) servo[center] = 0;
+		if(joy1Btn(3) == 1) servo[center] = 255;
+		if(joystick.joy1_y1 > 30 && SensorValue[Touch] == 0) motor[scissorFront] = 80;
+		if(joystick.joy1_y1 < -30) motor[scissorFront] =  -80;
 		if(joystick.joy1_y2 > 10) motor[ballRamp] = 75;
 		if(joystick.joy1_y2 < -10) motor[ballRamp] = -75;
 
 		if(joystick.joy2_y1 > 30 || joystick.joy2_y1 < -30) { //10
-			if(joystick.joy1_y1 >= 70) {
+			if(joystick.joy1_y1 >= 70 && rightServoPos == 0 && leftServoPos == 0) {
 				motor[rightFront] = 70;
 				motor[rightBack] = 70;
 			} else if (joystick.joy2_y1 <= -70) {
@@ -69,7 +86,7 @@ task main() {
 			}
 		}
 		if(joystick.joy2_y2 > 30 || joystick.joy2_y2 < -30) { //10
-			if(joystick.joy1_y2 >= 70) {
+			if(joystick.joy1_y2 >= 70 && rightServoPos == 0 && leftServoPos == 0s) {
 				motor[leftFront] = 70;
 				motor[leftBack] = 70;
 			} else if (joystick.joy2_y2 <= -70) {

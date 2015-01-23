@@ -1,5 +1,5 @@
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTServo,  HTMotor)
-#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
+#pragma config(Sensor, S2,     touch,          sensorTouch)
 #pragma config(Motor,  motorA,           ,             tmotorNXT, openLoop)
 #pragma config(Motor,  motorB,           ,             tmotorNXT, openLoop)
 #pragma config(Motor,  motorC,           ,             tmotorNXT, openLoop)
@@ -21,10 +21,13 @@
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
 void initializeRobot() {
-	servo[ballContainer] = 220;
-	servo[grabberRight] = 160;
-	servo[grabberLeft] = 160;
+	servo[ballContainer] = 170;
+	servo[grabberRight] = 20; //Hook near NXTS
+	rightServoPos = 0; //up
+	servo[grabberLeft] = 30;
+	leftServoPos = 0; //up
 	servo[grabberSide] = 160;
+	servo[center] = 255;
 	return;
 }
 
@@ -32,26 +35,4 @@ task main() {
 	//Ball grabber facing towards your ramp
 	initializeRobot();
 	waitForStart();
-	move(2 * 12, 75);
-	turn(90, 40, false);
-	move(1 * 12, 75);
-	turn(90, 40, true);
-	move(5 * 12, 75);
-	turn(90, 40, false);
-	move(14, 75);
-	turn(45, 40, true);
-	move(2, 75);
-	wait1Msec(200);
-	grabRollingGoalLeft();
-	wait1Msec(200);
-	turn(45, 40, false);
-	move(4, -75);
-	turn(90, 45, true);
-	move(18, 75);
-	wait1Msec(200);
-	grabRollingGoalRight();
-	wait1Msec(200);
-	turn(22, 40, false);
-	move(8 * 12, -75);
-	turn(180, 60, true);
 }
