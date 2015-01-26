@@ -23,7 +23,7 @@
 
 void initializeRobot() {
 	servo[ballContainer] = 170;
-	servo[grabberRight] = 20; //Hook near NXTS
+	servo[grabberRight] = 20; //Hook near NXT
 	rightServoPos = 0; //up
 	servo[grabberLeft] = 30;
 	leftServoPos = 0; //up
@@ -68,7 +68,7 @@ task main() {
 		}
 		if(joy1Btn(1) == 1) servo[center] = 0;
 		if(joy1Btn(3) == 1) servo[center] = 255;
-		if(joystick.joy1_y1 > 30 && SensorValue[Touch] == 0) motor[scissorFront] = 80;
+		if(joystick.joy1_y1 > 30 && SensorValue[touch] == 0) motor[scissorFront] = 80;
 		if(joystick.joy1_y1 < -30) motor[scissorFront] =  -80;
 		if(joystick.joy1_y2 > 10) motor[ballRamp] = 75;
 		if(joystick.joy1_y2 < -10) motor[ballRamp] = -75;
@@ -85,8 +85,8 @@ task main() {
 				motor[rightBack] = joystick.joy2_y1;
 			}
 		}
-		if(joystick.joy2_y2 > 30 || joystick.joy2_y2 < -30) { //10
-			if(joystick.joy1_y2 >= 70 && rightServoPos == 0 && leftServoPos == 0s) {
+		if(joystick.joy2_y2 > 30 || joystick.joy2_y2 < -30) {
+			if(joystick.joy1_y2 >= 70 && rightServoPos == 0 && leftServoPos == 0) {
 				motor[leftFront] = 70;
 				motor[leftBack] = 70;
 			} else if (joystick.joy2_y2 <= -70) {

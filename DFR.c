@@ -44,20 +44,20 @@ task main() {
 	turn(90, 30, true);
 	move(1.4 * 12, 75);
 	turn(90, 30, false);
-	move(2.2 * 12, 75);
+	move(2.3 * 12, 75);
 	servo[grabberRight] = 210;
 	rightServoPos = 1;
 	wait1Msec(1000);
-	move(8, -75);
+	move(9, -75);
 	servo[center] = 40;
-	wait1Msec(500);
+	wait1Msec(1000);
 	servo[center] = 255;
 	wait1Msec(100);
-	turn(80, 30, false);
+	turn(70, 30, false);
 	servo[grabberLeft] = 200;
 	rightServoPos = 1;
 	wait1Msec(500);
-	turn(65, 30, true);
+	turn(55, 30, true);
 	move(7 * 12, -75);
 	turn(140, 30, true);
 }

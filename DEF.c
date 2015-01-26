@@ -22,7 +22,7 @@
 
 void initializeRobot() {
 	servo[ballContainer] = 170;
-	servo[grabberRight] = 20; //Hook near NXTS
+	servo[grabberRight] = 20; //Hook near NXT
 	rightServoPos = 0; //up
 	servo[grabberLeft] = 30;
 	leftServoPos = 0; //up
@@ -37,5 +37,5 @@ task main() {
 	waitForStart();
 	move(7 * 12, -85);
 	wait1Msec(4000);
-	move(4 * 12, 85);
+	move(3 * 12, 85);
 }
