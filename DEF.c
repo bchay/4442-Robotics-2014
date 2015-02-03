@@ -20,6 +20,13 @@
 #include "robotFunctions.h"
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
+//rightServoUp: 20
+//rightServoDown: 200
+//leftServoUp: 30
+//leftServoDown: 210
+//centerUp: 255
+//centerDown: 100
+
 void initializeRobot() {
 	servo[ballContainer] = 170;
 	servo[grabberRight] = 20; //Hook near NXT
@@ -36,6 +43,6 @@ task main() {
 	initializeRobot();
 	waitForStart();
 	move(7 * 12, -85);
-	wait1Msec(4000);
+	wait1Msec(3000);
 	move(3 * 12, 85);
 }

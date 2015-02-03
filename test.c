@@ -21,6 +21,13 @@
 #include "robotFunctions.h"
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
+//rightServoUp: 20
+//rightServoDown: 200
+//leftServoUp: 30
+//leftServoDown: 210
+//centerUp: 255
+//centerDown: 100
+
 void initializeRobot() {
 	servo[grabberRight] = 210;
 	return;

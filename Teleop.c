@@ -20,9 +20,15 @@
 #include "robotFunctions.h"
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
+//rightServoUp: 20
+//rightServoDown: 200
+//leftServoUp: 30
+//leftServoDown: 210
+//centerUp: 255
+//centerDown: 10
 
 void initializeRobot() {
-	servo[ballContainer] = 170;
+	servo[ballContainer] = 200; // higher is lower
 	servo[grabberRight] = 20; //Hook near NXT
 	rightServoPos = 0; //up
 	servo[grabberLeft] = 30;
@@ -73,8 +79,8 @@ task main() {
 		if(joystick.joy1_y2 > 10) motor[ballRamp] = 75;
 		if(joystick.joy1_y2 < -10) motor[ballRamp] = -75;
 
-		if(joystick.joy2_y1 > 30 || joystick.joy2_y1 < -30) { //10
-			if(joystick.joy1_y1 >= 70 && rightServoPos == 0 && leftServoPos == 0) {
+		if(joystick.joy2_y1 > 30 || joystick.joy2_y1 < -30) {
+			if(joystick.joy1_y1 >= 70) { // && rightServoPos == 0 && leftServoPos == 0
 				motor[rightFront] = 70;
 				motor[rightBack] = 70;
 			} else if (joystick.joy2_y1 <= -70) {
@@ -86,7 +92,7 @@ task main() {
 			}
 		}
 		if(joystick.joy2_y2 > 30 || joystick.joy2_y2 < -30) {
-			if(joystick.joy1_y2 >= 70 && rightServoPos == 0 && leftServoPos == 0) {
+			if(joystick.joy1_y2 >= 70) {
 				motor[leftFront] = 70;
 				motor[leftBack] = 70;
 			} else if (joystick.joy2_y2 <= -70) {

@@ -28,7 +28,7 @@
 //centerDown: 100
 
 void initializeRobot() {
-	servo[ballContainer] = 170;
+	servo[ballContainer] = 200;
 	servo[grabberRight] = 20; //Hook near NXTS
 	rightServoPos = 0; //up
 	servo[grabberLeft] = 30;
@@ -44,7 +44,7 @@ task main() {
 	waitForStart();
 	move(72, 60);
 	turn(90, 30, true);
-	move(13.5, 75);
+	move(15, 75);
 	turn(90, 30, false);
 	move(29, 75);
 	servo[grabberRight] = 210;
@@ -62,4 +62,13 @@ task main() {
 	turn(55, 30, true);
 	move(82, -75);
 	turn(170, 45, true); //26.2s
+	servo[grabberRight] = 20; //Hook near NXT
+	rightServoPos = 0; //up
+	servo[grabberLeft] = 30;
+	leftServoPos = 0; //up
+	wait1Msec(100);
+	move(3, -80);
+	turn(50, 40, true);
+	move(55, -80);
+	turn(70, 40, false);
 }

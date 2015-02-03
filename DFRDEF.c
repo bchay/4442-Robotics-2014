@@ -24,9 +24,11 @@
 //rightServoDown: 200
 //leftServoUp: 30
 //leftServoDown: 210
+//centerUp: 255
+//centerDown: 100
 
 void initializeRobot() {
-	servo[ballContainer] = 170;
+	servo[ballContainer] = 200;
 	servo[grabberRight] = 20; //Hook near NXTS
 	rightServoPos = 0; //up
 	servo[grabberLeft] = 30;
@@ -40,28 +42,17 @@ task main() {
 	//Ball Grabber facing rolling goals from ramp
 	initializeRobot();
 	waitForStart();
-	move(2 * 12, 85);
-	turn(90, 45, false);
-	move(1 * 12, 85);
-	turn(90, 45,  true);
-	move(4 * 12, 85);
-	turn(90, 45, false);
-	move(8, 80);
-	turn(90, 50, true);
-	move(3 * 12, 80);
+	move(76, 60);
+	turn(90, 30, true);
+	move(15, 75);
+	turn(90, 30, false);
+	move(25, 75);
 	servo[grabberRight] = 210;
 	rightServoPos = 1;
-	wait1Msec(850);
+	wait1Msec(700);
 	move(9, -80);
-	servo[center] = 40;
-	wait1Msec(500);
+	servo[center] = 100;
+	wait1Msec(600); //800
 	servo[center] = 255;
-	wait1Msec(300);
-	turn(70, 45, false);
-	servo[grabberLeft] = 200;
-	rightServoPos = 1;
-	wait1Msec(400);
-	turn(55, 50, true);
-	move(7 * 12, -85);
-	turn(150, 50, true);
+	wait1Msec(100);
 }
